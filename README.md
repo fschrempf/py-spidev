@@ -39,6 +39,7 @@ spi.mode = 0b01
   min: 0b00 = 0, max: 0b11 = 3
 * `threewire` - SI/SO signals shared
 * `read0` - Read 0 bytes after transfer to lower CS if cshigh == True
+* `mosi_idle_low` - Set SO line to low when idle
 
 > [!IMPORTANT]
 > To be able to use a setting attribute, it needs to be supported by the

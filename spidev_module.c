@@ -1311,6 +1311,52 @@ SpiDev_set_read0(SpiDevObject *self, PyObject *val, void *closure)
 	return 0;
 }
 
+#ifdef SPI_MOSI_IDLE_LOW
+
+static PyObject *
+SpiDev_get_mosi_idle_low(SpiDevObject *self, void *closure)
+{
+	PyObject *result;
+
+	if (self->mode & SPI_MOSI_IDLE_LOW)
+		result = Py_True;
+	else
+		result = Py_False;
+
+	Py_INCREF(result);
+	return result;
+}
+
+static int
+SpiDev_set_mosi_idle_low(SpiDevObject *self, PyObject *val, void *closure)
+{
+	uint32_t tmp;
+	int ret;
+
+	if (val == NULL) {
+		PyErr_SetString(PyExc_TypeError,
+			"Cannot delete attribute");
+		return -1;
+	}
+	else if (!PyBool_Check(val)) {
+		PyErr_SetString(PyExc_TypeError,
+			"The mosi_idle_low attribute must be boolean");
+		return -1;
+	}
+
+	if (val == Py_True)
+		tmp = self->mode | SPI_MOSI_IDLE_LOW;
+	else
+		tmp = self->mode & ~SPI_MOSI_IDLE_LOW;
+
+	ret = __spidev_set_mode(self->fd, tmp);
+
+	if (ret != -1)
+		self->mode = tmp;
+	return ret;
+}
+#endif /* SPI_MOSI_IDLE_LOW */
+
 static PyGetSetDef SpiDev_getset[] = {
 	{"mode", (getter)SpiDev_get_mode, (setter)SpiDev_set_mode,
 			"SPI mode as two bit pattern of \n"
@@ -1332,6 +1378,10 @@ static PyGetSetDef SpiDev_getset[] = {
 			"maximum speed in Hz\n"},
 	{"read0", (getter)SpiDev_get_read0, (setter)SpiDev_set_read0,
 			"Read 0 bytes after transfer to lower CS if cshigh == True\n"},
+#ifdef SPI_MOSI_IDLE_LOW
+	{"mosi_idle_low", (getter)SpiDev_get_mosi_idle_low, (setter)SpiDev_set_mosi_idle_low,
+			"mosi line low when idle\n"},
+#endif
 	{NULL},
 };
 
