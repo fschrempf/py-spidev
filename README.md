@@ -40,6 +40,12 @@ spi.mode = 0b01
 * `threewire` - SI/SO signals shared
 * `read0` - Read 0 bytes after transfer to lower CS if cshigh == True
 
+> [!IMPORTANT]
+> To be able to use a setting attribute, it needs to be supported by the
+> underlying SPI controller kernel driver and hardware. Not all drivers support
+> all settings! In case of a setting not being supported the error `[Errno 22]
+> Invalid argument` is thrown.
+
 ## Methods
 
     open_path(filesystem_path)
