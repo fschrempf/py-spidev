@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-line-length
+        name: Check line length <= 79 for .md files
+        entry: bash -c "grep -n '.\\{80,\\}' $@ && exit 1 || exit 0"
+        language: system
+        files: \.md$

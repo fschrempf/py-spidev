@@ -14,7 +14,8 @@ Changelog
 3.6
 ====
 
-* Added read0 flag to enable reading 0 bytes after transfer to lower CS when cshigh == True
+* Added read0 flag to enable reading 0 bytes after transfer to lower CS when
+  cshigh == True
 
 3.5
 ====
@@ -42,8 +43,9 @@ Changelog
 2.0
 ===
 
-Code sourced from http://elk.informatik.fh-augsburg.de/da/da-49/trees/pyap7k/lang/py-spi
-and modified.
+Code sourced from
+http://elk.informatik.fh-augsburg.de/da/da-49/trees/pyap7k/lang/py-spi and
+modified.
 
 Pre 2.0
 =======
