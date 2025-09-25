@@ -1,13 +1,11 @@
-Python Spidev
-=============
+# Python Spidev
 
 This project contains a python module for interfacing with SPI devices from
 user space via the spidev linux kernel driver.
 
 All code is MIT licensed unless explicitly stated otherwise.
 
-Usage
------
+## Usage
 
 ```python
 import spidev
@@ -16,8 +14,7 @@ spi.open_path(spidev_devicefile_path)
 to_send = [0x01, 0x02, 0x03]
 spi.xfer(to_send)
 ```
-Settings
---------
+## Settings
 
 ```python
 import spidev
@@ -43,8 +40,7 @@ spi.mode = 0b01
 * `threewire` - SI/SO signals shared
 * `read0` - Read 0 bytes after transfer to lower CS if cshigh == True
 
-Methods
--------
+## Methods
 
     open_path(filesystem_path)
 
@@ -96,8 +92,7 @@ will be split into smaller chunks and sent in multiple operations.
 
 Disconnects from the SPI device.
 
-The Linux kernel and SPI bus numbering and the role of udev
------------------------------------------------------------
+## The Linux kernel and SPI bus numbering and the role of udev
 
 ### Summary
 
