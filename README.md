@@ -14,6 +14,16 @@ spi.open_path(spidev_devicefile_path)
 to_send = [0x01, 0x02, 0x03]
 spi.xfer(to_send)
 ```
+
+## Kernel
+
+The module uses the `SPI_IOC_RD_MODE32` and `SPI_IOC_WR_MODE32` ioctls that are
+available since Linux kernel version 3.15. Older kernels are not supported.
+
+Some features (e.g. `mosi_idle_low`) depend on the support being available in
+the Linux kernel. Make sure the module is built against the proper kernel
+header versions, otherwise the feature might be missing.
+
 ## Settings
 
 ```python
